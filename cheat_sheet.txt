@@ -1,0 +1,36 @@
+\l - Lists all available databases.
+CREATE DATABASE name - Creates a new database with the specified name.
+\c name - Connects to the specified database.
+\conninfo - Displays information about the current connection.
+DROP DATABASE name - Deletes the specified database.
+CREATE TABLE name(...) - Creates a new table with the specified columns.
+\d name - Displays the description of the structure of the specified table.
+DROP TABLE name - Deletes the specified table.
+INSERT INTO name(...) - Adds new rows of data into the table.
+\dt name - Lists all tables in the current database.
+\i path - Executes SQL commands from the specified file.
+SELECT * FROM name - Selects all data from the specified table.
+SELECT FROM name - Error, incomplete SELECT command.
+SELECT first_name FROM name - Selects only the "first_name" column from the specified table.
+SELECT first_name, last_name FROM name - Selects the "first_name" and "last_name" columns from the specified table.
+SELECT email FROM name - Selects only the "email" column from the specified table.
+SELECT * FROM name ORDER BY column DESC/ASC - Sorts the query results by the specified column in descending/ascending order.
+SELECT DISTINCT column FROM name - Returns unique values of the specified column from the table.
+SELECT * FROM name WHERE condition - Selects data from the table that satisfies the specified condition.
+SELECT * FROM name LIMIT num - Returns the specified number of records from the table.
+SELECT * FROM name OFFSET num LIMIT num - Skips the specified number of records and returns the next specified number of records from the table.
+SELECT * FROM name OFFSET num FETCH FIRST num ROW ONLY - Skips the specified number of records and returns the next specified number of records from the table.
+SELECT * FROM name WHERE column IN (value1, value2) - Returns records where the value of the column matches one of the specified values.
+SELECT * FROM name WHERE column BETWEEN value1 AND value2 - Returns records where the value of the column is within the specified range.
+SELECT * FROM name WHERE column LIKE pattern - Returns records where the value of the column matches the specified pattern.
+SELECT column, COUNT(*) FROM name GROUP BY column - Groups records by the specified column and counts the number of records in each group.
+SELECT * FROM name HAVING condition - Filters groups of records created by the GROUP BY operator based on the specified condition.
+SELECT column AS alias FROM name - Renames the column in the query result.
+SELECT COALESCE(column, default_value) FROM name - Returns the first non-NULL value from the list.
+CREATE TABLE name(...) - Creates a new table with the specified columns.
+CREATE EXTENSION IF NOT EXISTS "extension_name" - Creates a PostgreSQL extension if it does not exist.
+DROP TABLE name - Deletes the specified table.
+INSERT INTO name(...) - Adds new rows of data into the table.
+SELECT * FROM name - Selects all data from the specified table.
+UPDATE name SET column = value WHERE condition - Updates data in the specified table according to the specified condition.
+DELETE FROM name WHERE condition - Deletes rows from the specified table based on the specified condition.

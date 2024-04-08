@@ -1,0 +1,225 @@
+\?
+\help
+\l # Lists all available databases
+CREATE DABASE name
+\с name # Connects to the specified database
+\conninfo
+DROP DATABASE name;
+
+CREATE TABLE name(
+id BIGSERIAL NOT NULL PRIMARY KEY,
+	first_name VARCHAR(50) NOT NULL,
+	last_name VARCHAR(50) NOT NULL,
+	gender VARCHAR(15) NOT NULL,
+	email VARCHAR(150),
+	date_of_birth DATE NOT NULL,
+	country_of_birth VARCHAR(50) NOT NULL
+);
+
+\d name
+DROP TABLE name;
+
+INSERT INTO name( # used to add new rows of data into a table in a database
+first_name, last_name, gender, email, date_of_birth)
+VALUES('Jonh', 'Doe', 'MALE', 'Jd@gmail.com', '2000-01-01'); 
+
+\dt name # it lists all tables in the current database
+\i path; # command in PostgreSQL is used to execute commands from a file. It reads and executes SQL commands from the specified file path
+SELECT * FROM name;
+SELECT FROM name;
+SELECT first_name FROM name;
+SELECT first_name, last_name FROM name;
+SELECT email FROM name;
+SELECT * FROM name ORDER BY country_of_birth ASC;
+SELECT * FROM name ORDER BY country_of_birth DESC;
+SELECT * FROM name ORDER BY email DESC;
+SELECT country_of_birth FROM name ORDER BY country_of_birth;
+SELECT DISTINCT country_of_birth FROM name ORDER BY country_of_birth;
+SELECT * FROM name WHERE gender = 'Female';
+SELECT * FROM name WHERE gender = 'Female' AND country_of_birth = 'Argentina';
+SELECT * FROM name WHERE gender = 'Female' AND (country_of_birth = 'Czech Republic' OR country_of_birth = 'Poland');
+SELECT * FROM name LIMIT 20;
+SELECT * FROM name OFFSET 10 LIMIT 5;
+SELECT * FROM name OFFSET 10 FETCH FIRST 5 ROW ONLY;
+
+SELECT * FROM name WHERE country_of_birth = 'Ukraine'
+OR country_of_birth = 'United Kingdom' OR country_of_birth 'Poland';
+SELECT * FROM name WHERE country_of_birth IN ('China', 'Argentina', 'Israel');
+SELECT * FROM name
+WHERE date_of_birth
+BETWEEN '2019-01-01' AND '2020-01-01';
+SELECT * FROM name WHERE email LIKE '%.com';
+SELECT * FROM name WHERE email LIKE '%@gmail.com';
+SELECT * FROM name WHERE email LIKE '%@google.com';
+SELECT * FROM name WHERE email LIKE '%@google.%';
+SELECT * FROM name WHERE country_of_birth LIKE 'p%';
+SELECT * FROM name WHERE country_of_birth LIKE 's%';
+SELECT * FROM name WHERE country_of_birth LIKE 'S%';
+SELECT * FROM name WHERE country_of_birth iLIKE 's%';
+SELECT country_of_birth, COUNT(*) FROM name GROUP BY country_of_birth;
+SELECT first_name, COUNT(*) FROM name GROUP BY first_name;
+SELECT country_of_birth, COUNT(*) FROM name GROUP BY country_of_birth HAVING COUNT(*) > 10;
+SELECT country_of_birth, COUNT(*) FROM name GROUP BY country_of_birth HAVING COUNT(*) > 10
+ORDER BY country_of_birth DESC;
+SELECT id, first_name AS name, last_name AS surname, gender AS sex, email, date_of_birth, country_of_birth
+FROM name;
+SELECT * FROM name;
+SELECT COALESCE(email, 'not applicable') FROM name;
+
+create table holiday (
+	id BIGSERIAL NOT NULL PRIMARY KEY,
+	destination_country VARCHAR(100) NOT NULL,
+	destination_city VARCHAR(100) NOT NULL,
+	price NUMERIC(19, 2) NOT NULL
+);
+
+\i path
+SELECT * FROM holiday;
+SELECT MAX(price) FROM holiday;
+SELECT MIN(price) FROM holiday;
+SELECT AVG(price) FROM holiday;
+SELECT ROUND(AVG(price)) FROM holiday;
+SELECT destination_country, destination_city, MAX(price) FROM holiday GROUP BY destination_country, destination_city;
+SELECT destination_country, destination_city, MIN(price) FROM holiday GROUP BY destination_country, destination_city;
+SELECT destination_country, MAX(price) FROM holiday GROUP BY destination_country, destination_city;
+SELECT SUM(price) FROM holiday;
+SELECT destination_country, SUM(price) FROM holiday GROUP BY destination_country;
+SELECT 100 + 2;
+SELECT 100 / 2;
+SELECT 100 * 2;
+SELECT 100 - 2;
+SELECT 100 ^ 2;
+SELECT 100 % 2;
+SELECT 5!;
+SELECT id, destination_country, destination_city, price FROM holiday;
+SELECT id, destination_country, destination_city, ROUND(price) FROM holiday;
+SELECT NOW();
+SELECT NOW()::DATE;
+SELECT NOW()::TIME;
+SELECT NOW() - INTERVAL '1 YEAR';
+SELECT NOW() - INTERVAL '100 YEAR';
+SELECT NOW() - INTERVAL '10 MONTHs';
+SELECT NOW() - INTERVAL '10 DAYS';
+SELECT NOW() + INTERVAL '100 YEAR';
+SELECT NOW() + INTERVAL '100 month';
+SELECT NOW();
+SELECT EXTRACT(YEAR FROM NOW());
+SELECT EXTRACT(MONTH FROM NOW());
+SELECT EXTRACT(DAY FROM NOW());
+SELECT EXTRACT(DOW FROM NOW());
+\d name
+SELECT first_name, last_name, gender, country_of_birth, date_of_birth FROM employee;
+SELECT first_name, last_name, gender, country_of_birth, date_of_birth, AGE(NOW(), date_of_birth) AS age FROM employee;
+\d employee;
+SELECT * FROM employee LIMIT 1;
+insert into employee (first_name, last_name, gender, email, date_of_birth, country_of_birth) values ('Delmar', 'MacAndie', 'Male', null, '2023-11-23', 'Poland');
+ALTER TABLE employee DROP CONSTRAINT employee_pkey;
+\! cls
+\d employee
+SELECT * FROM employee WHERE id =1 ;
+insert into employee (first_name, last_name, gender, email, date_of_birth, country_of_birth) values ('Delmar', 'MacAndie', 'Male', null, '2023-11-23', 'Poland');
+SELECT * FROM employee WHERE id =1 ;
+ALTER TABLE employee ADD PRIMARY KEY(id);
+DELETE FROM employee WHERE id =1;
+SELECT * FROM employee WHERE id =1 ;
+\! cls
+ALTER TABLE employee ADD PRIMARY KEY (id);
+SELECT email, count(*) FROM employee GROUP BY email;
+SELECT email, count(*) FROM employee GROUP BY email HAVING COUNT(*) > 1;
+SELECT email, count(*) FROM employee GROUP BY email HAVING COUNT(*) > 1;
+SELECT * FROM employee WHERE email = 'ihumphery1@blog.com';
+ALTER TABLE employee ADD CONSTRAINT unique_email_adress UNIQUE (email);
+SELECT * FROM employee WHERE email = 'ihumphery1@blog.com';
+DELETE FROM employee WHERE id = 1001;
+\d employee
+SELECT * FROM employee;
+insert into employee (first_name, last_name, gender, email, date_of_birth, country_of_birth) values ('Ilario', 'Humphery', 'Panda', 'panda@blog.com', '2023-10-09', 'China');
+SELECT DISTINCT gender from employee;
+ALTER TABLE employee ADD CONSTRAINT gender_constraint CHECK (gender = 'Female' OR gender = 'Male');
+DELETE FROM employee WHERE gender = 'Panda';
+ALTER TABLE employee ADD CONSTRAINT gender_constraint CHECK (gender = 'Female' OR gender = 'Male');
+SELECT * FROM employee;
+DELETE FROM employee WHERE id = 2;
+SELECT * FROM employee WHERE email LIKE '%google%' AND country_of_birth = 'China';
+DELETE FROM employee WHERE email LIKE '%google%' AND country_of_birth = 'China';
+SELECT * FROM employee WHERE email LIKE '%google%' AND country_of_birth = 'China';
+SELECT * FROM employee;
+UPDATE employee SET email = 'Hephzibah@gmail.com' WHERE id = 9;
+SELECT * FROM employee WHERE id = 9;
+UPDATE employee SET first_name = 'John', last_name = 'Doe', email = 'John.Doe@gmail.com' WHERE id = 3;
+SELECT * FROM employee WHERE id = '3';
+INSERT INTO employee (id, first_name, last_name, gender, email, date_of_birth, country_of_birth)
+VALUES (3, 'John', 'Doe', 'Female', 'Johh.Doe@gmail.com', DATE '2023-08-09', 'China');
+INSERT INTO employee (id, first_name, last_name, gender, email, date_of_birth, country_of_birth)
+VALUES (3, 'John', 'Doe', 'Female', 'Johh.Doe@gmail.com', DATE '2023-08-09', 'China')
+ON CONFLICT (id) DO NOTHING;
+SELECT * FROM employee WHERE id = '3';
+INSERT INTO employee (id, first_name, last_name, gender, email, date_of_birth, country_of_birth)
+VALUES (3, 'John', 'Doe', 'Female', 'Johh.Doe@gmail.com', DATE '2023-08-09', 'China')
+ON CONFLICT (email) DO NOTHING;
+INSERT INTO employee (id, first_name, last_name, gender, email, date_of_birth, country_of_birth)
+VALUES (3, 'John', 'Doe', 'Female', 'Johh.Doe@gmail.com', DATE '2023-08-09', 'China')
+ON CONFLICT (first_name) DO NOTHING;
+INSERT INTO employee (id, first_name, last_name, gender, email, date_of_birth, country_of_birth)
+VALUES (3, 'John', 'Doe', 'Female', 'Johh.Doe@google.com', DATE '2023-08-09', 'China')
+ON CONFLICT (id) DO UPDATE SET email = EXCLUDED.email;
+INSERT INTO employee (id, first_name, last_name, gender, email, date_of_birth, country_of_birth)
+VALUES (3, 'Jane', 'Doe', 'Female', 'Jane.Doe@google.com', DATE '2023-08-09', 'China')
+ON CONFLICT (id) DO UPDATE SET email = EXCLUDED.email, first_name = EXCLUDED.first_name;
+
+CREATE TABLE bicycle (
+id BIGSERIAL NOT NULL PRIMARY KEY,
+make VARCHAR(100) NOT NULL,
+type VARCHAR(100) NOT NULL,
+price NUMERIC(19, 2) NOT NULL
+);
+ALTER TABLE employee ADD bicycle_id BIGINT REFERENCES bicycle (id);
+\d employee
+ALTER TABLE employee ADD UNIQUE(bicycle_id);
+INSERT INTO bicycle (make, type, price) VALUES ('Indi ATB', 'Mountain Bike', '100.00');
+INSERT INTO bicycle (make, type, price) VALUES ('Apollo Cafe', 'Women Hybrid Bike', '160.00');
+INSERT INTO bicycle (make, type, price) VALUES ('Brompton', 'Folding Bike', '1045.00');
+SELECT * FROM bicycle;
+SELECT * FROM employee LIMIT(10);
+UPDATE employee SET bicycle_id =2 WHERE id = 4;
+SELECT * FROM employee WHERE id = 4;
+SELECT * FROM bicycle;
+SELECT * FROM employee
+JOIN bicycle ON employee.bicycle_id = bicycle.id;
+SELECT employee.first_name, bicycle.make, bicycle.type, bicycle.price
+FROM employee
+JOIN bicycle ON employee.bicycle_id = bicycle.id;
+SELECT * FROM employee
+LEFT JOIN bicycle ON bicycle.id = employee.bicycle_id;
+SELECT * FROM employee
+LEFT JOIN bicycle ON bicycle.id = employee.bicycle_id WHERE bicycle_id IS NOT NULL;
+SELECT * FROM employee
+RIGHT JOIN bicycle ON bicycle.id = employee.bicycle_id WHERE bicycle_id IS NOT NULL;
+SELECT * FROM employee
+FULL OUTER JOIN bicycle ON bicycle.id = employee.bicycle_id;
+SELECT * FROM employee
+LEFT JOIN bicycle ON bicycle.id = employee.bicycle_id
+WHERE bicycle_id IS NOT NULL;
+\copy (SELECT * FROM employee LEFT JOIN bicycle ON bicycle.id = employee.bicycle_id WHERE bicycle_id IS NOT NULL) TO 'Path' DELIMITER ',' CSV HEADER;
+SELECT * FROM pg_available_extensions;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+\df
+SELECT uuid_generate_v4();
+CREATE TABLE passport (
+passport_serial UUID NOT NULL PRIMARY KEY,
+issue_date DATE NOT NULL,
+expire_date DATE NOT NULL,
+country_of_issue VARCHAR(150) NOT NULL
+);
+INSERT INTO passport (passport_serial, issue_date, expire_date, country_of_issue)
+VALUES (uuid_generate_v4(), '2000-03-19', '2020-03-19', 'United_Kingdom');
+SELECT * FROM passport;
+
+
+
+
+
+
+
+
+

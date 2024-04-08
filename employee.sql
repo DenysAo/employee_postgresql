@@ -8,7 +8,7 @@ create table employee (
 	country_of_birth VARCHAR(50) NOT NULL
 );
 insert into employee (first_name, last_name, gender, email, date_of_birth, country_of_birth) values ('Delmar', 'MacAndie', 'Male', null, '2023-11-23', 'Poland');
-insert into employee (first_name, last_name, gender, email, date_of_birth, country_of_birth) values ('Ilario', 'Humphery', 'Male', 'ihumphery1@blog.com', '2023-10-09', 'China');
+insert into employee (first_name, last_name, gender, email, date_of_birth, country_of_birth) values ('Ilario', 'Humphery', 'Panda', 'panda@blog.com', '2023-10-09', 'China');
 insert into employee (first_name, last_name, gender, email, date_of_birth, country_of_birth) values ('Marj', 'Amdohr', 'Female', 'mamdohr2@cocolog-nifty.com', '2023-08-09', 'China');
 insert into employee (first_name, last_name, gender, email, date_of_birth, country_of_birth) values ('Beale', 'Moubray', 'Male', null, '2024-03-24', 'China');
 insert into employee (first_name, last_name, gender, email, date_of_birth, country_of_birth) values ('Tom', 'Keightley', 'Male', 'tkeightley4@flavors.me', '2024-01-03', 'Norway');
